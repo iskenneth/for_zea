@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💗</title>
+
+<style> 
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive;
+    background: linear-gradient(to bottom, #ffc0cb, #ffb6c1);
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container{
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #ff1493;
+}
+
+p {
+    color: white;
+    font-size: 16px;
+}
+
+button {
+    margin: 8px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: hotpink;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* bouquet animation */
+.customBouquet {
+    width: 220px;
+    max-width: 80%;
+    margin: 20px auto;
+    display: block;
+    animation: floatBouquet 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(255,105,180,0.5));
+}
+
+@keyframes floatBouquet {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* hearts */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1: INTRO -->
+<div id="screen1" class="container">
+  <div class="card">
+
+    <h1>Hi 💗</h1>
+
+    <p>
+      I have something for you…<br>
+      wanna see it? 🥺
+    </p>
+
+    <button onclick="startYes()">Yes 💗</button>
+    <button id="noBtn" onclick="moveNo()">No 😤</button>
+
+  </div>
+</div>
+
+<!-- SCREEN 2: BOUQUET + LETTER -->
+<div id="screen2" class="container" style="display:none;">
+  <div class="card">
+
+    <h1>For You 🌸</h1>
+
+    <!-- YOUR DIGITAL / IMAGE BOUQUET -->
+    <img src="boquet.png" class="customBouquet" alt="bouquet">
+
+    <p>I made this for you 💗
+    
+        stargazers x carnation<br><br>
+    </p>
+
+    <!-- ENVELOPE -->
+    <img 
+      src="https://cdn-icons-png.flaticon.com/512/561/561127.png" 
+      width="90"
+      style="cursor:pointer;"
+      onclick="openLetter()"
+    >
+
+    <p style="font-size:14px;">Tap the envelope ✉️</p>
+
+    <!-- LETTER -->
+    <div id="letter" style="display:none; margin-top:15px;">
+      <div style="
+        background:rgb(226, 94, 186);
+        color:#ff1493;
+        padding:15px;
+        border-radius:15px;
+        text-align:left;
+      ">
+        <p>
+          Hi Zet....💗<br><br>
+
+          I hope you're okay pooo, just know that grades doesn't define youuu okieee?<br>
+          May summer paaaa, chance mo yun to bawi, very normal man mag summer sa engineering plus zero based pa kayo, soo hirapppp<br><br>
+
+          You can always try pa rin naman poo, ENGR. RCE pa rin naman ket nag summer same lang sila<br>
+          Continueee lang poo Zettt 🌸<br><br>
+
+          Padayon Engineer basic lang sayo yan!!!<br><br>
+
+          Always heree pooo if you need any help 💖
+        </p>
+      </div>
+
+      <br>
+      <button onclick="goToHug()">Next 🫂</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCREEN 3: HUG -->
+<div id="screen3" class="container" style="display:none;">
+  <div class="card">
+
+    <p>Do you want lablab? 🥺</p>
+
+    <button onclick="yesHug()">Yes 💗</button>
+    <button id="noBtn2" onclick="moveNo()">No 😤</button>
+
+    <div id="loading" style="display:none;">
+      <p>Preparing your lablab... 🫂💞</p>
+    </div>
+
+    <div id="finalHug" style="display:none;">
+      <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDJiZDcwenZkb3kxeHk5Y202OXYyaWNha3lxcmNncmw2Y3lmOWw3eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9UjsJugXyKeXfqaixo/giphy.gif" width="220">
+      <p>Got you <br>hereee poooo 🫂</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+/* intro */
+function startYes() {
+    document.getElementById("screen1").style.display = "none";
+    document.getElementById("screen2").style.display = "block";
+}
+
+/* letter */
+function openLetter() {
+    document.getElementById("letter").style.display = "block";
+}
+
+/* go to hug */
+function goToHug() {
+    document.getElementById("screen2").style.display = "none";
+    document.getElementById("screen3").style.display = "block";
+}
+
+/* moving no button */
+function moveNo() {
+    const btn = event.target;
+
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    btn.style.position = "absolute";
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+/* hug system */
+function yesHug() {
+    document.getElementById("loading").style.display = "block";
+
+    setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("finalHug").style.display = "block";
+    }, 2000);
+}
+
+/* floating hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "fixed";
+    heart.style.bottom = "-10px";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = "20px";
+    heart.style.animation = "floatUp 5s linear";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+}
+
+setInterval(createHeart, 500);
+
+</script>
+
+</body>
+</html>
